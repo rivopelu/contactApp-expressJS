@@ -55,6 +55,12 @@ const addContact = (contact) => {
     const contacts = loadContact();
     contacts.push(contact);
     saveContacts(contacts);
+};
+
+// cek nama yang duplicate
+const cekDuplicate=(nama) => {
+    const contacts = loadContact();
+    return contacts.find((contact) => contact.nama === nama);
 }
 
-module.exports = {loadContact, findContact, addContact};
+module.exports = {loadContact, findContact, addContact, cekDuplicate};
