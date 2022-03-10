@@ -7,7 +7,7 @@ const port = 7000
 
 
 // Modul Local
-const {loadContact, findContact} = require('./utils/contacts')
+const {loadContact, findContact, addContact} = require('./utils/contacts')
 
 app.set('view engine', 'ejs');
 
@@ -19,6 +19,7 @@ app.use(morgan('dev'));
 
 //-----------BUILDIN MIDLEWARE--------
 app.use(express.static('public'));
+app.use(express.urlencoded());
 
 
 // ROUTE
@@ -59,6 +60,21 @@ app.get('/contact', (req, res) => {
         title : 'çontact',
         contacts
     });
+})
+
+// HALAMAN TAMBAH DATA CONTACT
+app.get('/contact/add', (req, res) => {
+    res.render('content/add-contact', {
+        title : 'form tambah data',
+        layout : 'main'
+    });
+})
+
+// PROCESS DATA CONTACT
+app.post('/contact', (req, res) => {
+    addContact(req.body);
+    res.redirect('/contact')
+    
 })
 
 // single contact
